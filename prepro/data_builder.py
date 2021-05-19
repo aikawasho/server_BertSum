@@ -217,7 +217,7 @@ def greedy_selection2(doc_sent_list, abstract_sent_list, summary_size):
 def greedy_selection3(doc_sent_list, abstract_sent_list, summary_size):
     #日本語の場合
     selected = []
-    doc_sent_list = doc_sent_list.split('。') 
+    doc_sent_list = doc_sent_list.split('\n')
     doc_sent_list = [a+ '。' for a in doc_sent_list]
     sents = doc_sent_list[:-1]
     if len(sents) < summary_size:
@@ -317,10 +317,11 @@ class BertData():
         if (len(src) == 0):
             return None
         #日本語の場合
-        src = src.split('。') 
+        src = src.split('\n')
         src = [a+ '。' for a in src]
-        src = src[:-1]
-        
+        if len(src)>1:
+            src = src[:-1]
+        print('ソース',src)
         original_src_txt = [' '.join(s) for s in src]
 
         idxs = [i for i, s in enumerate(src)] #if (len(s) > self.args.min_src_ntokens)]
