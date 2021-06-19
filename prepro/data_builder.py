@@ -22,7 +22,7 @@ from .utils import _get_word_ngrams
 
 # 日本語BERT用のtokenizerを宣言
 from transformers.tokenization_bert_japanese import BertJapaneseTokenizer
-tokenizer = BertJapaneseTokenizer.from_pretrained('/Users/shota/Documents/ginza/summary_GUI/Server/BertSum/models/Japanese_L-12_H-768_A-12_E-30_BPE_WWM_transformers', do_lower_case=True)
+tokenizer = BertJapaneseTokenizer.from_pretrained('./BertSum/models/Japanese_L-12_H-768_A-12_E-30_BPE_WWM_transformers', do_lower_case=True)
 
 
 def load_json(p, lower):
@@ -319,8 +319,8 @@ class BertData():
         #日本語の場合
         src = src.split('\n')
         src = [a+ '。' for a in src]
-        if len(src)>1:
-            src = src[:-1]
+       # if len(src)>1:
+        #    src = src[:-1]
         print('ソース',src)
         original_src_txt = [' '.join(s) for s in src]
 

@@ -17,7 +17,7 @@ class bert_args():
         self.min_nsents = min_nsents
         self.max_nsents = max_nsents
         self.temp_dir = '../temp'
-        self.bert_config_path = '/Users/shota/Documents/ginza/summary_GUI/Server/BertSum/models/Japanese_L-12_H-768_A-12_E-30_BPE_WWM_transformers/config.json'
+        self.bert_config_path = './BertSum/models/Japanese_L-12_H-768_A-12_E-30_BPE_WWM_transformers/config.json'
         self.encoder = encoder
         self.param_init = param_init 
         self.param_init_glorot = param_init_glorot
@@ -29,7 +29,7 @@ class bert_args():
         
 args = bert_args()
 
-test_from  = '/Users/shota/Documents/ginza/summary_GUI/Server/BertSum/models/model_step_2000.pt'
+test_from  = './BertSum/models/model_step_2000.pt'
 checkpoint = torch.load(test_from, map_location=torch.device('cpu'))
 config = BertConfig.from_json_file(args.bert_config_path)
 model = Summarizer(args, device="cpu", load_pretrained_bert=False, bert_config = config)
@@ -63,6 +63,7 @@ def Bertsum_pred(src):
     mean = sum(scores)/len(scores)
     scores = (scores-mean)/np.var(scores)
     print(scores)
+
     for i, idx in enumerate(selected_ids):
         #print(idx)
         #if(len(src_str[i])==0):
